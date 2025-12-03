@@ -13,7 +13,7 @@ import DownloadCode from './pages/DownloadCode';
 function App() {
   return (
     <LanguageProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/cv-anis-mnasri">
         <div className="App">
           <Navigation />
           <Routes>
