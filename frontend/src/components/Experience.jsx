@@ -91,8 +91,8 @@ const Experience = () => {
         </h2>
         <p className="text-center text-slate-600 mb-16">
           {language === 'en'
-            ? 'A journey through 17 years of quality excellence'
-            : 'Un parcours de 17 ans d\'excellence qualité'}
+            ? 'A journey through 18 years of quality excellence'
+            : 'Un parcours de 18 ans d\'excellence qualité'}
         </p>
 
         <div className="relative">

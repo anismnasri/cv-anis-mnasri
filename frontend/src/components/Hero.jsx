@@ -62,8 +62,8 @@ const Hero = () => {
             </p>
             <p className="text-lg text-slate-300 mb-8 leading-relaxed">
               {language === 'en'
-                ? '17 years of expertise in QA & Test Automation'
-                : '17 ans d\'expertise en QA & Automatisation de Tests'}
+                ? '18 years of expertise in QA & Test Automation'
+                : '18 ans d\'expertise en QA & Automatisation de Tests'}
             </p>
 
             {/* Contact Info */}
@@ -131,7 +131,7 @@ const Hero = () => {
               <div className="w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-br from-sky-500 to-slate-700 p-2 shadow-2xl">
                 <div className="w-full h-full rounded-full overflow-hidden bg-slate-800 border-4 border-white">
                   <img
-                    src="/profile-anis-mnasri.jpg"
+                    src={`${process.env.PUBLIC_URL}/profile-anis-mnasri.jpg`}
                     alt={personalInfo.name}
                     className="w-full h-full object-cover"
                   />

@@ -1,0 +1,27 @@
+### **Solution 2 : Fixer la page CV imprimable (404)**
+
+Pour GitHub Pages, nous devons ajouter un fichier `404.html` qui redirige vers `index.html` :
+Action: file_editor create /app/frontend/public/404.html --file-text "<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\"utf-8\">
+    <title>Anis MNASRI - CV</title>
+    <script type=\"text/javascript\">
+      // GitHub Pages SPA redirect
+      // https://github.com/rafgraph/spa-github-pages
+      var pathSegmentsToKeep = 1;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+"
+Observation: Create successful: /app/frontend/public/404.html

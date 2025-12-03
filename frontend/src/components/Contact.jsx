@@ -33,22 +33,50 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/contact`, formData);
-      
-      if (response.data.success) {
+      // Check if backend is available (for self-hosted deployments)
+      if (BACKEND_URL && BACKEND_URL !== 'undefined' && BACKEND_URL !== '') {
+        const response = await axios.post(`${BACKEND_URL}/api/contact`, formData);
+        
+        if (response.data.success) {
+          toast({
+            title: language === 'en' ? 'Message Sent!' : 'Message Envoyé !',
+            description:
+              language === 'en'
+                ? 'Thank you for your message. I will get back to you soon.'
+                : 'Merci pour votre message. Je vous recontacterai bientôt.',
+          });
+          setFormData({ name: '', email: '', subject: '', message: '' });
+        }
+      } else {
+        // For GitHub Pages or static hosting without backend
+        // Use mailto as fallback
+        const mailtoLink = `mailto:${personalInfo.contact.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+          `From: ${formData.name} (${formData.email})
+
+${formData.message}`
+        )}`;
+        window.location.href = mailtoLink;
+        
         toast({
-          title: language === 'en' ? 'Message Sent!' : 'Message Envoyé !',
+          title: language === 'en' ? 'Opening Email Client' : 'Ouverture du Client Email',
           description:
             language === 'en'
-              ? 'Thank you for your message. I will get back to you soon.'
-              : 'Merci pour votre message. Je vous recontacterai bientôt.',
+              ? 'Your email client will open with the message pre-filled.'
+              : 'Votre client email s\'ouvrira avec le message pré-rempli.',
         });
         setFormData({ name: '', email: '', subject: '', message: '' });
       }
     } catch (error) {
       console.error('Error submitting contact form:', error);
+      // Fallback to mailto
+      const mailtoLink = `mailto:${personalInfo.contact.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+        `From: ${formData.name} (${formData.email})
+
+${formData.message}`
+      )}`;
+      window.location.href = mailtoLink;
       toast({
-        title: language === 'en' ? 'Error' : 'Erreur',
+        title: language === 'en' ? 'Opening Email Client' : 'Ouverture du Client Email',
         description:
           language === 'en'
             ? 'Failed to send message. Please try again.'
